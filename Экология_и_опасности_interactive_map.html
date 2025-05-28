@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<title>Экология и опасности</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        blockquote {
+            border-left: 4px solid #4caf50;
+            background: #e8f5e9;
+            padding: 10px 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+        a {
+            color: #1976d2;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin: 30px 0;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        .spoiler {
+            margin: 10px 0;
+            padding: 10px;
+            background: #e0f7fa;
+            border-left: 4px solid #00acc1;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #toTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: none;
+            z-index: 100;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .dark-mode blockquote {
+            background: #1e1e1e;
+            border-color: #81c784;
+        }
+        .dark-mode a {
+            color: #90caf9;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+h2, h3 {
+    animation: fadeInUp 1s ease both;
+}
+</style>
+
+<link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme()">🌓 Переключить тему</button>
+<p></p>
+<h2>🌍 Экология и опасности: загрязнение воздуха, воды и земли</h2>
+<p></p>
+<h3>🟢 Введение</h3>
+<blockquote>Экологические проблемы становятся всё более актуальными. Загрязнение воздуха, воды и почвы влияет на здоровье человека, биоразнообразие и климат. Поговорим о том, какие причины этого, что происходит в реальном мире и как это можно исправить.</blockquote>
+<p></p>
+<hr/>
+<p></p>
+<h3>🌫️ Загрязнение воздуха</h3>
+<p></p>
+<h4>🔶 Источники:</h4>
+<ul><li>🏭 Промышленные выбросы</li>
+<li>🚗 Транспорт</li>
+<li>⚡️ Тепловые электростанции</li>
+<p></p>
+<h4>🔴 Последствия:</h4>
+<li>😷 Респираторные заболевания</li>
+<li>🫁 Астма</li>
+<li>💰 Институциональные затраты на лечение</li>
+<p></p>
+<h4>📺 Видео:</h4>
+<a href="https://www.youtube.com/watch?v=BasTn22KHb8" target="_blank">Смотреть на YouTube</a>
+<p></p>
+<h4>📈 Инфографика:</h4>
+<img alt="Загрязнение воздуха" src="https://upload.wikimedia.org/wikipedia/commons/7/74/Air_pollution_in_Europe_2020_map.png" style="max-width:100%;"/>
+<p></p>
+<hr/>
+<p></p>
+<h3>💧 Загрязнение воды</h3>
+<p></p>
+<h4>🔶 Источники:</h4>
+<li>🏭 Стоки заводов</li>
+<li>🌾 Сельхоз удобрения</li>
+<li>🚿 Бытовые стоки</li>
+<p></p>
+<h4>🔴 Последствия:</h4>
+<li>🐟 Разрушение водных экосистем</li>
+<li>🤒 Эпидемии</li>
+<li>☠️ Отравления</li>
+<p></p>
+<h4>📺 Видео:</h4>
+<a href="https://www.youtube.com/watch?v=C7f7Zq-8LTc" target="_blank">Смотреть на YouTube</a>
+<p></p>
+<h4>📈 Инфографика:</h4>
+<img alt="Загрязнение воды" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Ocean_pollution_plastic_trash_infographic.svg/1280px-Ocean_pollution_plastic_trash_infographic.svg.png" style="max-width:100%;"/>
+<p></p>
+<hr/>
+<p></p>
+<h3>🌱 Загрязнение земли</h3>
+<p></p>
+<h4>🔶 Источники:</h4>
+<li>🗑️ Свалки</li>
+<li>☢️ Токсичные отходы</li>
+<li>🌽 Химия в сельском хозяйстве</li>
+<p></p>
+<h4>🔴 Последствия:</h4>
+<li>🌾 Ухудшение плодородия почвы</li>
+<li>🧬 Токсины в пищевой цепи</li>
+<p></p>
+<h4>📺 Видео:</h4>
+<a href="https://www.youtube.com/watch?v=GXjhzeEjSts" target="_blank">Смотреть на YouTube</a>
+<p></p>
+<h4>📈 Инфографика:</h4>
+<img alt="Загрязнение почвы" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Soil_contamination_causes_and_effects.png" style="max-width:100%;"/>
+<p></p>
+<hr/>
+<p></p>
+<h3>⚡️ Что мы можем с этим сделать</h3>
+<p></p>
+<li>🌱 Развитие зелёных технологий</li>
+<li>♻️ Раздельный сбор и переработка отходов</li>
+<li>📚 Экообразование</li>
+<li>🏛 Законодательные инициативы</li>
+<p></p>
+<blockquote>💡 Маленькие шаги каждого из нас складываются в большую победу для природы.</blockquote>
+<p></p>
+<hr/>
+<p></p>
+<h3>📊 Статистика</h3>
+<input id="searchInput" onkeyup="filterTable()" placeholder="Поиск по таблице..." style="padding:8px;width:100%;margin-bottom:10px;" type="text"/>
+<table border="1" cellpadding="8" cellspacing="0" id="statsTable" style="width:100%;border-collapse:collapse;">
+<thead>
+<tr style="background:#dce775;">
+<th onclick="sortTable(0)">Показатель</th>
+<th onclick="sortTable(1)">Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Выбросы в атмосферу в России</td><td>-20% за 2024</td></tr>
+<tr><td>Обеспеченность питьевой водой</td><td>+4.5% населения</td></tr>
+<tr><td>Удалено несанкционированных свалок</td><td>191</td></tr>
+</tbody>
+</table>
+<p>Источник: <a href="https://journal.ecostandard.ru/eco/kontekst/ekologicheskaya-povestka-v-rossii-osnovnye-itogi-2024-goda/" target="_blank">journal.ecostandard.ru</a></p>
+<script>
+function sortTable(n) {{
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("statsTable");
+  switching = true;
+  dir = "asc";
+  while (switching) {{
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {{
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      if (dir == "asc") {{
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {{
+          shouldSwitch = true;
+          break;
+        }}
+      }} else if (dir == "desc") {{
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {{
+          shouldSwitch = true;
+          break;
+        }}
+      }}
+    }}
+    if (shouldSwitch) {{
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount++;
+    }} else {{
+      if (switchcount == 0 && dir == "asc") {{
+        dir = "desc";
+        switching = true;
+      }}
+    }}
+  }}
+}}
+
+function filterTable() {{
+  var input, filter, table, tr, td, i, j, txtValue;
+  input = document.getElementById("searchInput");
+  filter = input.value.toLowerCase();
+  table = document.getElementById("statsTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 1; i < tr.length; i++) {{
+    tr[i].style.display = "none";
+    td = tr[i].getElementsByTagName("td");
+    for (j = 0; j < td.length; j++) {{
+      if (td[j]) {{
+        txtValue = td[j].textContent || td[j].innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {{
+          tr[i].style.display = "";
+          break;
+        }}
+      }}
+    }}
+  }}
+}}
+</script>
+<p></p>
+<li>📉 -20% выбросов в атмосферу в России за 2024</li>
+<li>🚰 +4.5% населения обеспечено питьевой водой</li>
+<li>🧹 Удалено 191 несанкционированная свалка</li></ul>
+<p></p>
+<p>Источник: <a href="https://journal.ecostandard.ru/eco/kontekst/ekologicheskaya-povestka-v-rossii-osnovnye-itogi-2024-goda/" target="_blank">Журнал EcoStandard</a></p>
+<p></p>
+<h4>📈 Инфографика:</h4>
+<img alt="Экоцифры России 2024" src="https://cdn.statcdn.com/Infographic/images/normal/28479.jpeg" style="max-width:100%;"/>
+<p></p>
+<hr/>
+<p></p>
+
+<h3>🗺️ Пример карты загрязнённых районов</h3>
+<div id="map" style="height: 400px; border-radius: 8px; margin-bottom: 30px;"></div>
+<script>
+  var map = L.map('map').setView([55.751244, 37.618423], 5);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {{
+    maxZoom: 18,
+  }}).addTo(map);
+
+  var markers = [
+    [55.751244, 37.618423, 'Москва: высокий уровень загрязнения воздуха'],
+    [59.9342802, 30.3350986, 'Санкт-Петербург: загрязнение водоёмов'],
+    [56.8389261, 60.6057025, 'Екатеринбург: промышленные выбросы']
+  ];
+
+  markers.forEach(function(marker) {{
+    L.marker([marker[0], marker[1]]).addTo(map).bindPopup(marker[2]);
+  }});
+</script>
+<h3>📆 Заключение</h3>
+<blockquote>Три фронта загрязнения: воздух, вода, почва — затрагивают каждого из нас. Но только совместные действия государства, бизнеса и граждан помогут преодолеть этот вызов.</blockquote>
+<p></p>
+<p>🌍 Экология — это не про кого-то, это про нас всех. Начни с себя уже сегодня!</p>
+<p></p>
+<!-- Спойлеры -->
+<div class="spoiler">
+<details>
+<summary>💡 Узнать, как сократить бытовые отходы</summary>
+<p>Используйте многоразовые пакеты, сдавайте пластик на переработку, покупайте товары без упаковки.</p>
+</details>
+</div>
+<div class="spoiler">
+<details>
+<summary>💧 Что делать при загрязнении воды в вашем районе?</summary>
+<p>Сообщите в местные органы, не пользуйтесь водой до очистки, используйте фильтры и кипячение.</p>
+</details>
+</div>
+<!-- Кнопка вверх -->
+<button id="toTop" onclick="scrollToTop()">🔝 Наверх</button>
+<script>
+    // Кнопка вверх
+    window.onscroll = function() {
+        document.getElementById("toTop").style.display = (document.documentElement.scrollTop > 300) ? "block" : "none";
+    };
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Переключение темы
+    function toggleTheme() {
+        document.body.classList.toggle("dark-mode");
+    }
+</script>
+</body>
+</html>
