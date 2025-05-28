@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Экология и опасности: загрязнение воздуха, воды и земли</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #121212;
+      color: #f1f1f1;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #c5e1a5;
+      animation: fadeInUp 1s ease both;
+    }
+    section {
+      margin-bottom: 3rem;
+      padding: 1.5rem;
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    a { color: #80cbc4; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #2a2a2a;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background: #33691e;
+      cursor: pointer;
+    }
+    tr:hover {
+      background: #333;
+    }
+    #map {
+      height: 400px;
+      border-radius: 12px;
+      margin-top: 1rem;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      background: #2a2a2a;
+      color: #f1f1f1;
+      border: 1px solid #555;
+      border-radius: 8px;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .top-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #66bb6a;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌍 Экология и опасности: загрязнение воздуха, воды и земли</h1>
+
+  <section>
+    <h2>Введение</h2>
+    <p>Экологические проблемы становятся всё более актуальными. Загрязнение воздуха, воды и почвы влияет на здоровье человека, биоразнообразие и климат. Поговорим о причинах, последствиях и путях решения.</p>
+  </section>
+
+  <section>
+    <h2>🌫️ Загрязнение воздуха</h2>
+    <p><strong>Источники:</strong> промышленные выбросы, транспорт, угольные электростанции.</p>
+    <p><strong>Последствия:</strong> респираторные заболевания, астма, рост расходов на здравоохранение.</p>
+    <p><a href="https://www.youtube.com/watch?v=BasTn22KHb8" target="_blank">Смотреть видео</a></p>
+  </section>
+
+  <section>
+    <h2>💧 Загрязнение воды</h2>
+    <p><strong>Источники:</strong> сбросы заводов, сельхозудобрения, бытовые стоки.</p>
+    <p><strong>Последствия:</strong> разрушение водных экосистем, отравления и эпидемии.</p>
+    <p><a href="https://www.youtube.com/watch?v=C7f7Zq-8LTc" target="_blank">Смотреть видео</a></p>
+  </section>
+
+  <section>
+    <h2>🌱 Загрязнение земли</h2>
+    <p><strong>Источники:</strong> свалки, токсичные отходы, химикаты в сельском хозяйстве.</p>
+    <p><strong>Последствия:</strong> снижение плодородия, попадание токсинов в пищевую цепь.</p>
+    <p><a href="https://www.youtube.com/watch?v=GXjhzeEjSts" target="_blank">Смотреть видео</a></p>
+  </section>
+
+  <section>
+    <h2>⚡ Что мы можем с этим сделать</h2>
+    <ul>
+      <li>Развитие зелёных технологий</li>
+      <li>Раздельный сбор и переработка отходов</li>
+      <li>Экообразование</li>
+      <li>Законодательные инициативы</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>📊 Статистика</h2>
+    <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Поиск по таблице...">
+    <table id="statsTable">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">Показатель</th>
+          <th onclick="sortTable(1)">Значение</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Выбросы в атмосферу</td><td>-20% (2024)</td></tr>
+        <tr><td>Доступ к питьевой воде</td><td>+4.5% населения</td></tr>
+        <tr><td>Ликвидация свалок</td><td>191 объект</td></tr>
+      </tbody>
+    </table>
+    <p>Источник: <a href="https://journal.ecostandard.ru/eco/kontekst/ekologicheskaya-povestka-v-rossii-osnovnye-itogi-2024-goda/" target="_blank">journal.ecostandard.ru</a></p>
+  </section>
+
+  <section>
+    <h2>🗺️ Пример карты загрязнённых районов</h2>
+    <div id="map"></div>
+  </section>
+
+  <section>
+    <h2>📆 Заключение</h2>
+    <p>Воздух, вода, земля — три фронта, на которых разыгрывается борьба за будущее. Только совместные усилия общества, бизнеса и власти способны остановить разрушение окружающей среды.</p>
+  </section>
+
+  <a href="#" class="top-btn">Наверх ↑</a>
+
+  <script>
+    function sortTable(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("statsTable");
+      switching = true;
+      dir = "asc";
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          switchcount++;
+        } else {
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+
+    function filterTable() {
+      var input = document.getElementById("searchInput");
+      var filter = input.value.toLowerCase();
+      var table = document.getElementById("statsTable");
+      var tr = table.getElementsByTagName("tr");
+
+      for (var i = 1; i < tr.length; i++) {
+        tr[i].style.display = "none";
+        var td = tr[i].getElementsByTagName("td");
+        for (var j = 0; j < td.length; j++) {
+          if (td[j]) {
+            var txtValue = td[j].textContent || td[j].innerText;
+            if (txtValue.toLowerCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    var map = L.map('map').setView([55.751244, 37.618423], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+    }).addTo(map);
+
+    var markers = [
+      [55.751244, 37.618423, 'Москва: высокий уровень загрязнения воздуха'],
+      [59.9342802, 30.3350986, 'Санкт-Петербург: загрязнение водоёмов'],
+      [56.8389261, 60.6057025, 'Екатеринбург: промышленные выбросы']
+    ];
+
+    markers.forEach(function(marker) {
+      L.marker([marker[0], marker[1]]).addTo(map).bindPopup(marker[2]);
+    });
+  </script>
+</body>
+</html>
